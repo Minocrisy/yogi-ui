@@ -17,8 +17,30 @@
     "jsx": "react-jsx",
     "declaration": true,
     "outDir": "dist",
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    },
+    "types": [
+      "node",
+      "jest",
+      "@testing-library/jest-dom",
+      "vite/client"
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ]
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.d.ts",
+    "src/vite-env.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage"
+  ]
 }
