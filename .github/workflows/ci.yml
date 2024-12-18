@@ -10,21 +10,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x, 20.x]
-
     steps:
     - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+    - name: Install Nix
+      uses: cachix/install-nix-action@v22
+
+    - name: Setup Dev Environment
+      run: |
+        cp .idx/dev.nix.template .idx/dev.nix
+        nix develop
 
     - name: Install dependencies
-      run: npm ci
+      run: npm install
 
     - name: Build
       run: npm run build
